@@ -1,3 +1,5 @@
+package mz.depthfirstsearch;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -6,29 +8,23 @@ import java.awt.*;
  */
 public class View extends JPanel {
 
-	static Grid grid;
+	private Grid grid;
 
-	public static void main(String[] args) {
-		int width   = Integer.parseInt(args[0]);
-		int height  = Integer.parseInt(args[1]);
-		int columns = Integer.parseInt(args[2]);
-		int rows    = Integer.parseInt(args[3]);
+	public View(int width, int height, Grid grid) {
+		Dimension d = new Dimension(width + 1, height + 1);
+		this.setPreferredSize(d);
+		this.grid = grid;
+		setup();
+	}
 
-		grid = new Grid(width, height, columns, rows);
-
+	public void setup() {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setBackground(Color.DARK_GRAY);
-
-		JPanel panel = new View();
-		Dimension d = new Dimension(width + 1, height + 1);
-		panel.setPreferredSize(d);
-
-		frame.add(panel);
+		frame.add(this);
 		frame.setVisible(true);
 		frame.pack();
-
 	}
 
 	public void paintComponent(Graphics g) {
@@ -39,7 +35,14 @@ public class View extends JPanel {
 			for (int r = 0; r < grid.rows; r++) {
 				Node node = grid.nodes[c][r];
 
-				g2.setColor(node.bgColor);
+				if (node.equals(grid.dfs.current) ) {
+					g2.setColor(node.currentColor);
+				} else if (node.visited) {
+					g2.setColor(node.bgColorVisited);
+				} else {
+					g2.setColor(node.bgColorUnvisited);
+				}
+
 				g2.fillRect(node.x, node.y, node.width, node.height);
 
 				g2.setColor(node.wallColor);
@@ -64,7 +67,6 @@ public class View extends JPanel {
 				}
 			}
 		}
-
 	}
 
 }

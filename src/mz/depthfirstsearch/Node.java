@@ -1,12 +1,17 @@
+package mz.depthfirstsearch;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Justin Praas
  */
 public class Node {
 
-	public Color bgColor;
+	public Color bgColorVisited;
+	public Color bgColorUnvisited;
 	public Color wallColor;
+	public Color currentColor;
 
 	public int x;
 	public int y;
@@ -20,6 +25,10 @@ public class Node {
 	// up, right, down, left
 	public boolean[] walls;
 
+	public boolean visited;
+
+	public ArrayList<Node> neighbors;
+
 	public Node(int c, int r, Grid grid) {
 		this.c = c;
 		this.r = r;
@@ -31,9 +40,20 @@ public class Node {
 		this.y = r * height;
 
 		this.walls = new boolean[]{true, true, true, true};
+		this.visited = false;
 
-		bgColor = Color.LIGHT_GRAY;
+		this.neighbors = new ArrayList<>();
+
+		bgColorUnvisited = Color.LIGHT_GRAY;
+		bgColorVisited = Color.WHITE;
 		wallColor = Color.DARK_GRAY;
+		currentColor = Color.RED;
 
+	}
+
+	public void setNeighbor(Node n) {
+		if (!neighbors.contains(n)) {
+			neighbors.add(n);
+		}
 	}
 }
