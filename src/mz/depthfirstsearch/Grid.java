@@ -15,6 +15,8 @@ public class Grid {
 	public int columns;
 	public int rows;
 
+	public boolean solve;
+
 	public Node[][] nodes;
 
 	public Node start;
@@ -25,16 +27,17 @@ public class Grid {
 	public ArrayList<Node> solution;
 
 	public static void main(String[] args) throws InterruptedException {
-		Grid grid = new Grid(800, 800, 100, 100);
+		Grid grid = new Grid(800, 800, 50, 50, true);
 	}
 
-	public Grid(int width, int height, int columns, int rows) throws InterruptedException {
+	public Grid(int width, int height, int columns, int rows, boolean solve) throws InterruptedException {
 		this.width      = width;
 		this.height     = height;
 		this.columns    = columns;
 		this.rows       = rows;
 		this.nodes      = new Node[columns][rows];
 		this.unvisitedNodes = new ArrayList<>();
+		this.solve = solve;
 
 		for (int c = 0; c < columns; c++) {
 			for (int r = 0; r < rows; r++) {
@@ -50,11 +53,17 @@ public class Grid {
 		}
 
 		this.start      = nodes[0][0];
+		this.goal       = nodes[columns - 1] [rows - 1];
 		this.dfs        = new DepthFirstSearch(start, this);
 		this.view       = new View(width, height, this);
-		this.goal       = dfs.depthFirstSearch(goal, this);
-		this.solution   = dfs.solve();
-		view.repaint();
+		dfs.depthFirstSearch(goal, this);
+
+		if (solve) {
+			this.solution   = dfs.solve();
+			view.repaint();
+		}
+
+
 	}
 
 	private void assignNeighbors(int i, int j) {

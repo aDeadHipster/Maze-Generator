@@ -68,9 +68,13 @@ public class View extends JPanel {
 			}
 		}
 		if (grid.solution != null) {
+			Node temp = grid.goal;
 			g2.setColor(Node.solvedColor);
+			g2.setStroke(new BasicStroke(4));
 			for (Node node : grid.solution) {
-				g2.fillRect(node.x + node.width/4, node.y + node.height/4, node.width/2, node.height/2);
+				g2.drawLine(temp.x + temp.width/2, temp.y + temp.height/2,
+						node.x + node.width/2, node.y + node.height/2);
+				temp = node;
 			}
 		}
 

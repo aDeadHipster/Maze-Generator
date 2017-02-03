@@ -21,10 +21,10 @@ public class DepthFirstSearch {
 //		}
 	}
 
-	public Node depthFirstSearch(Node goal, Grid grid) throws InterruptedException {
+	public void depthFirstSearch(Node goal, Grid grid) throws InterruptedException {
 
 		while (this.grid.unvisitedNodes.size() > 0) {
-			//Thread.sleep(1);
+			//Thread.sleep(2);
 
 			ArrayList<Node> unvisitedNeighbors = unvisitedNeighbors(this.grid.unvisitedNodes, current);
 
@@ -55,7 +55,6 @@ public class DepthFirstSearch {
 		}
 
 		System.out.println("DONE: " + current.c + ", " + current.r);
-		return current;
 	}
 
 	public ArrayList<Node> solve() {
