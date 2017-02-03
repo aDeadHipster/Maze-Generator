@@ -8,10 +8,11 @@ import java.util.ArrayList;
  */
 public class Node {
 
-	public Color bgColorVisited;
-	public Color bgColorUnvisited;
-	public Color wallColor;
-	public Color currentColor;
+	public static Color bgColorUnvisited = Color.LIGHT_GRAY;
+	public static Color bgColorVisited = Color.WHITE;
+	public static Color wallColor = Color.DARK_GRAY;
+	public static Color currentColor = Color.RED;
+	public static Color solvedColor = Color.GREEN;
 
 	public int x;
 	public int y;
@@ -43,11 +44,6 @@ public class Node {
 		this.visited = false;
 
 		this.neighbors = new ArrayList<>();
-
-		bgColorUnvisited = Color.LIGHT_GRAY;
-		bgColorVisited = Color.WHITE;
-		wallColor = Color.DARK_GRAY;
-		currentColor = Color.RED;
 
 	}
 

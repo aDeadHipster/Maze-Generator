@@ -36,16 +36,16 @@ public class View extends JPanel {
 				Node node = grid.nodes[c][r];
 
 				if (node.equals(grid.dfs.current) ) {
-					g2.setColor(node.currentColor);
+					g2.setColor(Node.currentColor);
 				} else if (node.visited) {
-					g2.setColor(node.bgColorVisited);
+					g2.setColor(Node.bgColorVisited);
 				} else {
-					g2.setColor(node.bgColorUnvisited);
+					g2.setColor(Node.bgColorUnvisited);
 				}
 
 				g2.fillRect(node.x, node.y, node.width, node.height);
 
-				g2.setColor(node.wallColor);
+				g2.setColor(Node.wallColor);
 				// Top wall
 				if (node.walls[0]) {
 					g2.drawLine(node.x, node.y, node.x + node.width, node.y);
@@ -67,6 +67,13 @@ public class View extends JPanel {
 				}
 			}
 		}
+		if (grid.solution != null) {
+			g2.setColor(Node.solvedColor);
+			for (Node node : grid.solution) {
+				g2.fillRect(node.x + node.width/4, node.y + node.height/4, node.width/2, node.height/2);
+			}
+		}
+
 	}
 
 }

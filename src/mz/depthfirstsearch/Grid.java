@@ -17,8 +17,12 @@ public class Grid {
 
 	public Node[][] nodes;
 
+	public Node start;
+	public Node goal;
+
 	public ArrayList<Node> unvisitedNodes;
 	public DepthFirstSearch dfs;
+	public ArrayList<Node> solution;
 
 	public static void main(String[] args) throws InterruptedException {
 		Grid grid = new Grid(800, 800, 100, 100);
@@ -45,9 +49,12 @@ public class Grid {
 			}
 		}
 
-		this.dfs    = new DepthFirstSearch(nodes[0][0], this);
-		this.view   = new View(width, height, this);
-		dfs.depthFirstSearch();
+		this.start      = nodes[0][0];
+		this.dfs        = new DepthFirstSearch(start, this);
+		this.view       = new View(width, height, this);
+		this.goal       = dfs.depthFirstSearch(goal, this);
+		this.solution   = dfs.solve();
+		view.repaint();
 	}
 
 	private void assignNeighbors(int i, int j) {
