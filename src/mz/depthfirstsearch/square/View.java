@@ -1,4 +1,4 @@
-package mz.depthfirstsearch;
+package mz.depthfirstsearch.square;
 
 import javax.swing.*;
 import java.awt.*;

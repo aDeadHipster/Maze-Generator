@@ -1,4 +1,4 @@
-package mz.depthfirstsearch;
+package mz.depthfirstsearch.square;
 
 import java.awt.*;
 import java.util.ArrayList;

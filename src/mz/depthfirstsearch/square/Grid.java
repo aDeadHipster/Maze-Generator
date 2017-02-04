@@ -1,4 +1,4 @@
-package mz.depthfirstsearch;
+package mz.depthfirstsearch.square;
 
 import java.util.ArrayList;
 
@@ -31,6 +31,7 @@ public class Grid {
 	}
 
 	public Grid(int width, int height, int columns, int rows, boolean solve) throws InterruptedException {
+		this.view       = new View(width, height, this);
 		this.width      = width;
 		this.height     = height;
 		this.columns    = columns;
@@ -55,7 +56,6 @@ public class Grid {
 		this.start      = nodes[0][0];
 		this.goal       = nodes[columns - 1] [rows - 1];
 		this.dfs        = new DepthFirstSearch(start, this);
-		this.view       = new View(width, height, this);
 		dfs.depthFirstSearch(goal, this);
 
 		if (solve) {
